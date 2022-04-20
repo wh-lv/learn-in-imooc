@@ -2539,7 +2539,37 @@ Foo.a()
 
 #### 六十九、promise-then执行顺序问题
 
+```js
+Promise.resolve().then(() => {
+    console.info(0)
+    return Promise.resolve(4)
+}).then(res => {
+    console.info(res)
+})
 
+Promise.resolve().then(() => {
+    console.info(1)
+}).then(() => {
+    console.info(2)
+}).then(() => {
+    console.info(3)
+}).then(() => {
+    console.info(5)
+}).then(() => {
+    console.info(6)
+})
+
+
+// 输出 0 1 2 3 4 5 6
+```
+
+**如果有多个 fulfilled promise 实例，同时执行 then 链式调用，then会交替执行**
+
+then中返回promise实例，会出现“慢两拍”的效果
+
+第一拍，promise需要有pending变为fulfilled
+
+第二拍，then函数挂载到MicroTaskQueue（参考Event Loop）
 
 
 
