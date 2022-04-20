@@ -2571,9 +2571,54 @@ then中返回promise实例，会出现“慢两拍”的效果
 
 第二拍，then函数挂载到MicroTaskQueue（参考Event Loop）
 
+#### 七十、React-setState经典面试题
+
+```react
+
+componentDidMount() {
+    // this.state.val 初始值是 0
+    
+    // 传入函数时 state 不会合并
+    // this.setState((preState, props) => {
+    //     return { val: preState.val + 1 }
+    // })
+    this.setState({ val: this.state.val + 1 })
+    console.log(this.state.val)
+    
+    this.setState({ val: this.state.val + 1 })
+    console.log(this.state.val)
+    
+    setTimeout(() => {
+        this.setState({ val: this.state.val + 1 })
+	    console.log(this.state.val)
+        
+        this.setState({ val: this.state.val + 1 })
+	    console.log(this.state.val)
+    }, 0)
+}
+
+// 0 0 2 3
+```
+
+state默认异步更新
+
+state默认合并后更新
 
 
 
+**state同步更新 - 不在React上下文中更新**
+
+setTimeout、setInterval、promise.then
+
+自定义的DOM事件（addEventListener("click", () => {})中是同步更新，onClick={}中是异步更新）
+
+Ajax回调
+
+**注意：React 18 中不一样**
+
+上述场景，在React 18中可以异步更新（Auto Batch）
+
+需将 ReactDOM.render 替换为 ReactDOM.createRoot
 
 
 
