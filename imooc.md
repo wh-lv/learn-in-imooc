@@ -2626,6 +2626,27 @@ setState是同步，只不过让React做成了异步的样子
 因为要考虑性能，多次state修改，只进行一次DOM渲染
 日常所说的“异步”不严谨
 
+### 七十二、对象和属性的连续赋值
+
+```js
+
+let a = { n: 1 }
+let b = a
+a.x = a = { n: 2 }
+
+console.log(a.x) // undefined
+console.log(b.x) // { n: 2 }
+
+```
+**a.x 的优先级要比赋值优先级高**
+可拆解为：
+a.x = undefined
+let x = a.x // x 变量是假想的，实际执行时不会有
+x = a = { n: 2 }
+
+
+
+
 
 
 
