@@ -2619,6 +2619,12 @@ Ajax回调
 上述场景，在React 18中可以异步更新（Auto Batch）
 
 需将 ReactDOM.render 替换为 ReactDOM.createRoot
+### 七十一、React-setState是微任务还是宏任务
+
+**setState本质是同步（不是宏任务或微任务，宏任务或微任务是对于异步来说的）**
+setState是同步，只不过让React做成了异步的样子
+因为要考虑性能，多次state修改，只进行一次DOM渲染
+日常所说的“异步”不严谨
 
 
 
