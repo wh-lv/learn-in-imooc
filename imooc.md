@@ -2644,6 +2644,35 @@ a.x = undefined
 let x = a.x // x 变量是假想的，实际执行时不会有
 x = a = { n: 2 }
 
+### 七十三、对象属性类型的问题
+```js
+
+let a = {}, b = '123', c = 123
+a[b] = 'b'
+a[c] = 'c'
+console.log(a[b]) // c
+
+let a = {}, b = Symbol('123'), c = Symbol('123') 
+a[b] = 'b'
+a[c] = 'c'
+console.log(a[b]) // b
+
+let a = {}, b = { key: '123' }, c = { key: '456' }
+a[b] = 'b'
+a[c] = 'c'
+console.log(a[b]) // c
+
+```
+**JS对象key的数据类型**
+只能是字符串和Symbol类型
+其他类型会被转换为字符串
+转换字符串会直接调用它的 toString() 方法
+**扩展：Map和WeakMap的key**
+Map的key可以是各种类型
+WeakMap的key只能是引用类型，传入值类型会报错
+
+
+
 
 
 
