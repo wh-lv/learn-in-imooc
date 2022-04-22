@@ -45,9 +45,11 @@
 // import "./03-write-code/LRU2"
 // import "./03-write-code/clone-deep"
 // import "./03-write-code/arr-to-tree"
-import "./03-write-code/tree-to-arr"
+// import "./03-write-code/tree-to-arr"
 
-// 4 3 2
+// practice 0421
+// import "./practice-0421/array-to-tree"
+import "./practice-0421/tree-to-array"
 
 // practice
 // import {
