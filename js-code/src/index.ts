@@ -49,7 +49,8 @@
 
 // practice 0421
 // import "./practice-0421/array-to-tree"
-import "./practice-0421/tree-to-array"
+// import "./practice-0421/tree-to-array"
+import "./practice-0421/dom-traverse"
 
 // practice
 // import {
