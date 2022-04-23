@@ -28,3 +28,9 @@ console.info(getInfo())
 
   或者新建一个 .browserslistrc 文件
  */
+
+  /**
+   * 1 posecss 是什么：javascript 转换样式的工具（帮助我们使用javascript转换css样式）
+   * poscess工作流程：通过 browserlist 告诉浏览器平台
+   * 添加前缀的话使用 autoprefixer
+   */

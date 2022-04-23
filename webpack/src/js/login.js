@@ -1,5 +1,6 @@
 import "../css/login.css"
 import "../css/login.less"
+import "../css/test.css"
 
 function login () {
     const oH2 = document.createElement("h2")
