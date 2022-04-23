@@ -12,7 +12,20 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     'style-loader',
-                    'css-loader'
+                    'css-loader',
+                    // {
+                    //     loader: 'postcss-loader',
+                    //     options: {
+                    //         postcssOptions: {
+                    //             plugins: [
+                    //                 // require('autoprefixer'),
+                    //                 // require('postcss-preset-env')
+                    //                 'postcss-preset-env'
+                    //             ]
+                    //         }
+                    //     }
+                    // }
+                    'postcss-loader'
                 ]
             },
             {
@@ -20,6 +33,7 @@ module.exports = {
                 use: [
                     'style-loader',
                     'css-loader',
+                    'postcss-loader',
                     'less-loader'
                 ]
             }

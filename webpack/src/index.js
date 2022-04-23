@@ -34,3 +34,8 @@ console.info(getInfo())
    * poscess工作流程：通过 browserlist 告诉浏览器平台
    * 添加前缀的话使用 autoprefixer
    */
+  /**
+   * postcss-preset-env
+   * 
+   * 预设 -- 插件集合
+   */
