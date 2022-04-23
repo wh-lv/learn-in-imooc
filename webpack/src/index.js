@@ -3,6 +3,8 @@ const getInfo = require("./js/api.js")
 
 import "./js/login"
 
+import "./js/image"
+
 console.info(sum(10, 20))
 console.info(square(10))
 console.info(getInfo())
@@ -38,4 +40,16 @@ console.info(getInfo())
    * postcss-preset-env
    * 
    * 预设 -- 插件集合
+   */
+
+  /**
+   * 打包图片
+   *  - img src
+   *    + 使用 require 导入图片，如果不配置 esModule: false，则需使用 .default 导出
+   *    + 也可以在配置中设置 esModule: false
+   *    + 采用 import xxx from '图片资源'，此时也可以直接使用 xxx
+   *  - background  url
+   * 
+   * 注意：
+   *  css-loader 看到 url（background-image） 之后会自动把它换成 require（require返回的是es Module） 语法
    */

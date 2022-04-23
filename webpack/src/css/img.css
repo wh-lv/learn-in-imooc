@@ -1,0 +1,7 @@
+.bgBox {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #000;
+    background-image: url('../img/Hi.\ Sorry\ to\ meet\ you.jpg');
+    background-size: contain;
+}

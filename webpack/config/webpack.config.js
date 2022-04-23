@@ -15,6 +15,7 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
+                            esModule: false,
                             importLoaders: 1 // @import模块在使用css-loader前，是否用之前的loaders处理（1：使用前一个）
                         }
                     },
@@ -40,11 +41,23 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
+                            esModule: false,
                             importLoaders: 1 // @import模块在使用css-loader前，是否用之前的loaders处理（1：使用前一个）
                         }
                     },
                     'postcss-loader',
                     'less-loader'
+                ]
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|webp)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            esModule: false
+                        }
+                    }
                 ]
             }
         ]
