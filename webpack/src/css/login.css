@@ -1,6 +1,4 @@
+@import './test.css';
 .title {
     color: #12345678;
-    display: grid;
-    transition: all .5s;
-    user-select: none;
 }

@@ -12,7 +12,12 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     'style-loader',
-                    'css-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1 // @import模块在使用css-loader前，是否用之前的loaders处理（1：使用前一个）
+                        }
+                    },
                     // {
                     //     loader: 'postcss-loader',
                     //     options: {
@@ -32,7 +37,12 @@ module.exports = {
                 test: /\.less$/,
                 use: [
                     'style-loader',
-                    'css-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1 // @import模块在使用css-loader前，是否用之前的loaders处理（1：使用前一个）
+                        }
+                    },
                     'postcss-loader',
                     'less-loader'
                 ]
