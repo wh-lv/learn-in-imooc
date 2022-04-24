@@ -53,3 +53,12 @@ console.info(getInfo())
    * 注意：
    *  css-loader 看到 url（background-image） 之后会自动把它换成 require（require返回的是es Module） 语法
    */
+  /**
+   * 设置图片名称与输出
+   * [ext]：扩展名
+   * [name]：文件名
+   * [hash]：
+   * [contentHash]：
+   * [hash:<length>]
+   * [path]：
+   */

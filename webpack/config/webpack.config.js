@@ -55,7 +55,9 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            esModule: false
+                            esModule: false,
+                            name: 'img/[name].[hash:10].[ext]',
+                            // outputPath: 'img' // 输出目录 也可在 name 属性中直接拼接
                         }
                     }
                 ]
