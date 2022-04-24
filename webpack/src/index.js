@@ -62,3 +62,15 @@ console.info(getInfo())
    * [hash:<length>]
    * [path]：
    */
+
+  /**
+   * url-loader 处理图片
+   * 
+   */
+
+  /**
+   * file-loader：将资源拷贝至指定的目录
+   * url-loader：图片转为 base64 
+   * 
+   * url-loader 内部可以调用 file-loader 设置 limit
+   */
