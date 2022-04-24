@@ -70,7 +70,23 @@ console.info(getInfo())
 
   /**
    * file-loader：将资源拷贝至指定的目录
-   * url-loader：图片转为 base64 
+   * url-loader：图片转为 base64 uri
    * 
    * url-loader 内部可以调用 file-loader 设置 limit
    */
+
+
+
+  /**
+   * webpack 5.0 之后可以使用 asset 模块（webpack 5.0 内置）
+   * asset处理图片
+   * 01 asset/resource -> 相当于 file-loader，可以把目标资源拷贝至指定目录
+   * 02 asset/inline -> url-loader
+   * 03 asset/source -> raw-laoder
+   * 04 assest 
+   */
+
+  /**
+   * asset 处理图标字体
+   */
+  import '../src/js/Font'
