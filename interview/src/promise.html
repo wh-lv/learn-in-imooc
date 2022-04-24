@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+</head>
+
+<body>
+    <script>
+        function Promise1(constructor) {
+            let self = this;
+            self.status = "pending" //定义状态改变前的初始状态 
+            self.value = undefined;//定义状态为resolved的时候的状态 
+            self.reason = undefined;//定义状态为rejected的时候的状态 
+            function resolve(value) {
+                //两个==="pending"，保证了了状态的改变是不不可逆的 
+                if (self.status === "pending") {
+                    self.value = value;
+                    self.status = "resolved";
+                }
+            }
+            function reject(reason) {
+                //两个==="pending"，保证了了状态的改变是不不可逆的
+                if (self.status === "pending") {
+                    self.reason = reason;
+                    self.status = "rejected";
+                }
+            }
+            //捕获构造异常 
+            try {
+                constructor(resolve, reject);
+            } catch (e) {
+                reject(e);
+            }
+        }
+        Promise1.prototype.then = function (onFullfilled, onRejected) {
+            let self = this;
+            switch (self.status) {
+                case "resolved": onFullfilled(self.value); break;
+                case "rejected": onRejected(self.reason); break;
+                default:
+            }
+        }
+
+        // 测试
+        var p1 = new Promise1(function (resolve, reject) { resolve(1) });
+        p1.then(function (x) { console.log(x) })
+        //输出1
+
+
+        // 复杂
+        const PENDING = 'pending'
+        const FULFILLED = 'fulfilled'
+        const REJECTED = 'rejected'
+        class MyPromise {
+            constructor(executor) {
+                this.state = PENDING
+                this.value = undefined
+                this.reason = undefined
+                this.onResolvedCallbacks = []
+                this.onRejectedCallbacks = []
+
+                let resolve = value => {
+                    if (this.state === PENDING) {
+                        this.state = FULFILLED
+                        this.value = value
+                        this.onResolvedCallbacks.forEach(fn => fn())
+                    }
+                }
+
+                let reject = reason => {
+                    if (this.state === PENDING) {
+                        this.state = REJECTED
+                        this.reason = reason
+                        this.onRejectedCallbacks.forEach(fn => fn())
+                    }
+                }
+
+                try {
+                    // 立即执行函数
+                    executor(resolve, reject)
+                } catch (err) {
+                    reject(err)
+                }
+            }
+
+            then(onFulfilled, onRejected) {
+                // 处理 then 不是回调的情况
+                onFulfilled = typeof onFulfilled === "function" ? onFulfilled : v => v
+                onRejected = typeof onRejected === "function" ? onRejected : err => { throw err }
+
+                // 保存 this
+                const self = this
+
+                return new MyPromise((resolve, reject) => {
+                    if (self.state === FULFILLED) {
+                        setTimeout(() => {
+                            try {
+                                const x = onFulfilled(self.value)
+                                x instanceof MyPromise ? x.then(resolve, reject) : resolve(x)
+                            } catch (error) {
+                                reject(error)
+                            }
+                        }, 0)
+                    }
+                    if (self.state === REJECTED) {
+                        setTimeout(() => {
+                            try {
+                                const x = onRejected(self.reason)
+                                x instanceof MyPromise ? x.then(resolve, reject) : resolve(x)
+                            } catch (error) {
+                                reject(error)
+                            }
+                        }, 0)
+                    }
+                    if (self.state === PENDING) {
+                        self.onResolvedCallbacks.push(() => {
+                            setTimeout(() => {
+                                let x = onFulfilled(self.value)
+                                x instanceof MyPromise ? x.then(resolve, reject) : resolve(x)
+                            }, 0)
+                        })
+                        self.onRejectedCallbacks.push(() => {
+                            setTimeout(() => {
+                                let x = onRejected(self.reason)
+                                x instanceof MyPromise ? x.then(resolve, reject) : resolve(x)
+                            }, 0)
+                        })
+                    }
+                })
+            }
+        }
+
+        let p = new MyPromise(function (resolve, reject) {
+            setTimeout(() => {
+                resolve({
+                    name: "zhihui",
+                    city: "beijing"
+                })
+            }, 1000)
+        })
+        p.then(res => {
+            console.info('res', res)
+        }).then(() => {
+            console.info(123)
+        })
+    </script>
+</body>
+
+</html>
