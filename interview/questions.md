@@ -93,7 +93,7 @@ class MyPromise {
     }
 }
 ```
-#### 三、如何实现 $nextTick 计数
+#### 三、如何统计 $nextTick 的调用次数
 ```js
 
 // main.js
