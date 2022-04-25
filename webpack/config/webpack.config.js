@@ -1,4 +1,7 @@
 const path = require("path")
+const { DefinePlugin } = require('webpack')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     entry: "./src/index.js",
@@ -88,5 +91,22 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'html-webpack-plugin',
+            template: './public/index.html',
+        }),
+        new DefinePlugin({ // 避免 public/index.html 中 BASE_URL 报错
+            BASE_URL: '"./"'
+        })
+    ]
 }
+
+/**
+ * class MyPlugin {
+ *  constructor() {}
+ *  apply()
+ * }
+ */

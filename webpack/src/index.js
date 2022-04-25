@@ -90,3 +90,8 @@ console.info(getInfo())
    * asset 处理图标字体
    */
   import '../src/js/Font'
+
+  /**
+   * 01 loader：对特定的类型进行转换
+   * 02 plugin：做更多事情，
+   */
