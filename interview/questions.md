@@ -175,6 +175,7 @@ TypeScript支持面向对象的多有特性，比如 类、接口等。
 方法 - 方法为对象要执行的操作
 
 #### 七、instanceof 原理
+判断当前实例的隐式原型是否指向（等于）目标对象的原型，顺着原型链向上判断（直到为 null）
 ```ts
 
 export function myInstanceof(target: any, origin: any): boolean {
