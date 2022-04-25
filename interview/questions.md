@@ -156,5 +156,49 @@ promiseAll([p3, p1, p2]).then(res => {
 })
 
 ```
+#### 五、谈谈构造函数
+JavaScript语言使用构造函数（constructor）作为对象的模板，所谓“构造函数”，就是专门用来生成实例对象的函数，它就是对象的模板，描述实例对象的基本结构。
+一个构造函数可以生成多个实例对象，这些实例对象都有相同的结构。都可以使用这个构造函数的属性与方法。
+**构造函数就是普通的函数，但是有自己的特征和用法**
+构造函数特点：
+函数内部使用了 this 关键字，代表了所要生成的对象实例；
+生成对象的时候，必须使用 new 命令
+
+#### 六、谈谈 TypeScript 中的 类
+TypeScript是面向对象的 JavaScript；
+类描述了所创建的对象的属性和方法；
+TypeScript支持面向对象的多有特性，比如 类、接口等。
+
+定义类的关键字为 class，后买你紧跟类名，类的数据成员：
+字段 - 字段是类里面生命的变量，字段表示对象的有关数据；
+构造函数 - 类实例化时调用，可以为类的对象分配内存；
+方法 - 方法为对象要执行的操作
+
+#### 七、instanceof 原理
+```ts
+
+export function myInstanceof(target: any, origin: any): boolean {
+    if (target == null) return false // null undefined 返回 false
+
+    const type = typeof target
+    if (type !== 'object' && type !== 'function') {
+        // 所有的值类型 instanceof 都返回 false
+        return false
+    }
+
+    let tempTarget = target // 防止修改 target
+    while (tempTarget) {
+        if (tempTarget.__proto__ === origin.prototype) {
+            return true
+        }
+
+        tempTarget = tempTarget.__proto__
+    }
+
+    return false
+}
+
+```
+
 
 
