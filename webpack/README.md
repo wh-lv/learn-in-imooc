@@ -2,8 +2,9 @@
 
 ```nodejs
 
-// npm webpack ... 运行本地安装的版本
-webpack --entry ./src/index.js --output-path ./dist --config webpack.config.js
+// npm webpack ... 运行本地安装的版本，后面加上 --watch 可在文件改动之后自动触发打包，也可在 webpack.config.js 中添加 watch: true 开启
+webpack --entry ./src/index.js --output-path ./dist --config webpack.config.js --watch
+
 
 
 ```

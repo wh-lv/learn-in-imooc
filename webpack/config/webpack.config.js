@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
+    // watch: true,
     mode: 'development',
     devtool: false,
     entry: "./src/index.js",

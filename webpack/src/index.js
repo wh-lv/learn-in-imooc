@@ -137,3 +137,19 @@ console.info(getInfo())
    * copy-webpack-plugin
    * 拷贝资源
    */
+
+
+
+  /**
+   * 开发模式
+   *  - watch
+   *  - live server
+   * 不足：
+   *  1. 所有源代码都会重新编译
+   *  2. 每次编译都需要进行文件读写
+   *  3. 应该是用友 live server 的功能
+   *  4. 不能实现局部刷新
+   * 
+   * webpack-dev-server
+   * 
+   */
