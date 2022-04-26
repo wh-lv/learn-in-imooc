@@ -131,3 +131,9 @@ console.info(getInfo())
     console.info(111)
   })
   console.info(p1)
+
+
+  /**
+   * copy-webpack-plugin
+   * 拷贝资源
+   */

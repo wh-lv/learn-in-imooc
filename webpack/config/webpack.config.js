@@ -2,6 +2,7 @@ const path = require("path")
 const { DefinePlugin } = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     mode: 'development',
@@ -116,11 +117,21 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            title: 'html-webpack-plugin',
+            title: 'Webpack',
             template: './public/index.html',
         }),
         new DefinePlugin({ // 避免 public/index.html 中 BASE_URL 报错
             BASE_URL: '"./"'
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'public',
+                    globOptions: {
+                        ignore: ['**/index.html']
+                    }
+                }
+            ]
         })
     ]
 }
