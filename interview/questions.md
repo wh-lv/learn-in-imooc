@@ -165,7 +165,7 @@ JavaScript语言使用构造函数（constructor）作为对象的模板，所�
 生成对象的时候，必须使用 new 命令
 
 #### 六、谈谈 TypeScript 中的 类
-TypeScript是面向对象的 JavaScript；
+TypeScript是**面向对象**的 JavaScript；
 类描述了所创建的对象的属性和方法；
 TypeScript支持面向对象的多有特性，比如 类、接口等。
 

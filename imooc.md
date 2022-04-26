@@ -1279,6 +1279,7 @@ position：absolute/fixed
 注意跨域的限制和判断
 
 #### 四十一、请描述koa2的洋葱圈模型
+Koa 的中间件模型就是洋葱圈模型。Koa的每个中间件就像是一个洋葱圈，每次当有一个请求进入的时候，每个中间件都会被执行两次。
 
 ![](E:\Installed\Tencent\Pictures\QQplayerPic\6-23 请描述koa2的洋葱圈模型[00_08_52][20220405-225333].png)
 
