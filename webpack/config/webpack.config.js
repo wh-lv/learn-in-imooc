@@ -4,6 +4,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+    mode: 'development',
+    devtool: false,
     entry: "./src/index.js",
     output: {
         filename: "built.js",
@@ -21,7 +23,7 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            // esModule: false,
+                            esModule: false,
                             importLoaders: 1 // @import模块在使用css-loader前，是否用之前的loaders处理（1：使用前一个）
                         }
                     },
@@ -47,7 +49,7 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            // esModule: false,
+                            esModule: false,
                             importLoaders: 1 // @import模块在使用css-loader前，是否用之前的loaders处理（1：使用前一个）
                         }
                     },
@@ -89,6 +91,25 @@ module.exports = {
                 generator: {
                     filename: 'font/[name].[hash:3][ext]'
                 }
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/, // 排除 node_module这个包
+                use: ['babel-loader'] // 此时使用 babel.config.js 配置的方式
+                // use: [
+                //     {
+                //         loader: 'babel-loader',
+                //         options: {
+                //             // plugins: [
+                //             //     '@babel/plugin-transform-arrow-functions',
+                //             //     '@babel/plugin-transform-block-scoping'
+                //             // ]
+                //             presets: [
+                //                 '@babel/preset-env'
+                //             ]
+                //         }
+                //     }
+                // ]
             }
         ]
     },

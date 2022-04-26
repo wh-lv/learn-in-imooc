@@ -95,3 +95,39 @@ console.info(getInfo())
    * 01 loader：对特定的类型进行转换
    * 02 plugin：做更多事情，
    */
+
+  /**
+   * babel
+   * JSX TS ES6+ -> 转换为浏览器平台能够直接使用
+   * 处理 JS 兼容
+   * 
+   * @babel/plugin-transform-arrow-functions
+   * @babel/plugin-transform-block-scoping
+   * 
+   * 
+   * @babel/preset-env 预设，插件集合
+   * 
+   * babel-loader 相关配置文件
+   * babel.config.js(json cjs mjs)
+   * babelrc.json(js)
+   */
+  const title = '前端'
+  const foo = () => {
+    console.info(title)
+  }
+
+  foo()
+
+
+  /**
+   * polyfill：
+   * @babel/preset-env 预设能转换的语法有限（const、let、箭头函数等），generator生成器、Symblo、promise无法转化
+   * webpack 5.0 之前 polyfill默认引入，但是会造成打包之后包体积过大的问题，可设置按需配置
+   * 
+   * @babel/polyfill（此包体积较大，babel7之后可以使用：core-js regenerator-runtime）
+   * 
+   */
+  const p1 = new Promise((resolve, reject) => {
+    console.info(111)
+  })
+  console.info(p1)
