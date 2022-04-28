@@ -3,6 +3,7 @@ const { DefinePlugin } = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 module.exports = {
     // watch: true,
@@ -98,7 +99,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/, // 排除 node_module这个包
                 use: ['babel-loader'] // 此时使用 babel.config.js 配置的方式
                 // use: [
@@ -136,7 +137,8 @@ module.exports = {
                     }
                 }
             ]
-        })
+        }),
+        new ReactRefreshWebpackPlugin()
     ]
 }
 
