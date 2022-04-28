@@ -10,6 +10,12 @@ module.exports = {
                 useBuiltIns: 'usage',
                 corejs: '3' // useBuiltIne 设置为 usage 时，core-js默认使用的是 2.x 版本
             }
-        ]
+        ],
+        [
+            '@babel/preset-react'
+        ],
+    ],
+    plugins: [
+        ['react-refresh/babel']
     ]
 }

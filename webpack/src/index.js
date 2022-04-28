@@ -167,3 +167,18 @@ if (module.hot) {
     console.info('title.js 模块更新了')
   })
 }
+
+
+
+/**
+ * React
+ * 配置 webpack 环境，使其能打包 React 项目
+ * 热更新
+ */
+import React from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './js/App.jsx'
+
+const root = createRoot(document.getElementById('app'))
+
+root.render(<App/>)
