@@ -3,6 +3,7 @@ const { DefinePlugin } = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
     // watch: true,
@@ -115,6 +116,10 @@ module.exports = {
                 //         }
                 //     }
                 // ]
+            },
+            {
+                test: /\.vue$/,
+                use: ['vue-loader']
             }
         ]
     },
@@ -136,7 +141,8 @@ module.exports = {
                     }
                 }
             ]
-        })
+        }),
+        new VueLoaderPlugin()
     ]
 }
 

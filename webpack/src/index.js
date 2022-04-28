@@ -167,3 +167,14 @@ if (module.hot) {
     console.info('title.js 模块更新了')
   })
 }
+
+
+/**
+ * Vue组件支持热更新
+ */
+import { createApp } from 'vue'
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.mount('#app')
