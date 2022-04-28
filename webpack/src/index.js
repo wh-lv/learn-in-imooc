@@ -153,3 +153,17 @@ console.info(getInfo())
    * webpack-dev-server
    * 
    */
+
+
+
+/**
+ * HMR功能
+ * 
+ */
+import './js/title'
+
+if (module.hot) {
+  module.hot.accept(['./js/title.js'], () => {
+    console.info('title.js 模块更新了')
+  })
+}

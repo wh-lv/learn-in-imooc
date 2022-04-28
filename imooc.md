@@ -1274,7 +1274,7 @@ position：absolute/fixed
 
 #### 四十、网页和iframe之间如何通讯
 
-是同postMessage通讯（接受用window.addEventListener("message")）
+是同域名下使用postMessage通讯（接受用window.addEventListener("message")）
 
 注意跨域的限制和判断
 

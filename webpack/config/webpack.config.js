@@ -16,6 +16,9 @@ module.exports = {
         // 这样配置的话，使用 asset 模块处理的图片和字体都会在一个目录里面
         // assetModuleFilename: 'image/[name].[hash:4][ext]' 
     },
+    devServer: {
+        hot: true
+    },
     module: {
         rules: [
             {
