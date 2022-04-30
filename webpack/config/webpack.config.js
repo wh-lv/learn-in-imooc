@@ -11,14 +11,25 @@ module.exports = {
     devtool: false,
     entry: "./src/index.js",
     output: {
-        filename: "built.js",
-        path: path.resolve(__dirname, "../dist"),
+        filename: "js/built.js",
+        path: path.resolve(__dirname, "../dist"), // 打包输出的目录
         // 此时 [ext] 前面不用加点
         // 这样配置的话，使用 asset 模块处理的图片和字体都会在一个目录里面
         // assetModuleFilename: 'image/[name].[hash:4][ext]' 
+
     },
     devServer: {
-        hot: true
+        hot: true,
+        static: {
+            // 告诉服务器从哪里提供内容。只有在你希望提供静态文件时才需要这样做。static.publicPath 将会被用来决定应该从哪里提供 bundle，并具有优先级。
+            publicPath: '/',
+            directory: path.join(__dirname, 'public'),
+        },
+        // hotOnly: true, // 此属性 webpack 最新版本好像删除了
+        port: 4000,
+        open: false, // 是否自动打开浏览器
+        compress: true, // 开启 gzip 压缩
+        historyApiFallback: true, // 任意 404 响应都可能需要被替代为 index.html, treu 开启
     },
     module: {
         rules: [
