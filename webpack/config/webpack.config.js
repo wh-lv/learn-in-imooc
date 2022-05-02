@@ -10,6 +10,14 @@ module.exports = {
     mode: 'development',
     devtool: false,
     entry: "./src/index.js",
+    resolve: {
+        extensions: ['.js', '.json', '.ts', '.jsx', '.vue'],
+
+        // 别名
+        alias: {
+            '@': path.resolve(__dirname, '../src')
+        }
+    },
     output: {
         filename: "js/built.js",
         path: path.resolve(__dirname, "../dist"), // 打包输出的目录

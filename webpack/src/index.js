@@ -192,3 +192,8 @@ import axios from 'axios'
 axios.get('/api/users').then(res => {
   console.info(res.data)
 })
+
+
+/**
+ * resolve 模块解析规则
+ */
