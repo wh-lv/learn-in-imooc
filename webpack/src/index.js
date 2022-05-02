@@ -182,3 +182,13 @@ import App from './js/App.jsx'
 const root = createRoot(document.getElementById('app'))
 
 root.render(<App/>)
+
+
+/**
+ * proxy代理设置
+ */
+import axios from 'axios'
+
+axios.get('/api/users').then(res => {
+  console.info(res.data)
+})

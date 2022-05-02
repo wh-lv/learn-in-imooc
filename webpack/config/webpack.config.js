@@ -30,6 +30,16 @@ module.exports = {
         open: false, // 是否自动打开浏览器
         compress: true, // 开启 gzip 压缩
         historyApiFallback: true, // 任意 404 响应都可能需要被替代为 index.html, treu 开启
+
+        proxy: {
+            '/api': {
+                target: 'https://api.github.com',
+                pathRewrite: {
+                    '/api': ''
+                },
+                changeOrigin: true
+            }
+        }
     },
     module: {
         rules: [
