@@ -197,3 +197,17 @@ axios.get('/api/users').then(res => {
 /**
  * resolve 模块解析规则
  */
+
+
+/**
+ * source-map
+ * 在调试时可以定位到源代码的信息
+ * 
+ * 
+ * eval-source-map
+ * inline-source-map
+ * cheap-source-map
+ * cheap-module-source-map
+ * hidden-source-map
+ * nosources-source-map
+ */

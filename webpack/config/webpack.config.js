@@ -8,7 +8,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 module.exports = {
     // watch: true,
     mode: 'development',
-    devtool: false,
+    devtool: 'source-map',
     entry: "./src/index.js",
     resolve: {
         extensions: ['.js', '.json', '.ts', '.jsx', '.vue'],
