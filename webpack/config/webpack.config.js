@@ -9,7 +9,7 @@ module.exports = {
     // watch: true,
     mode: 'development',
     devtool: 'source-map',
-    entry: "./src/index.js",
+    entry: "./src/index.ts",
     resolve: {
         extensions: ['.js', '.json', '.ts', '.jsx', '.vue'],
 
@@ -128,7 +128,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(jsx?|ts)$/,
                 exclude: /node_modules/, // 排除 node_module这个包
                 use: ['babel-loader'] // 此时使用 babel.config.js 配置的方式
                 // use: [
@@ -145,7 +145,7 @@ module.exports = {
                 //         }
                 //     }
                 // ]
-            }
+            },
         ]
     },
     plugins: [
