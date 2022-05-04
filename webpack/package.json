@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run ck && webpack --config ./config/webpack.config.js",
     "serve": "webpack serve --config ./config/webpack.config.js",
-    "ck": "tsc --mpEmit"
+    "ck": "tsc --noEmit",
+    "build2": "npm run ck && webpack --config ./config/webpack.common.js --env production",
+    "serve2": "webpack serve --config ./config/webpack.common.js --env development"
   },
   "keywords": [],
   "author": "",
@@ -40,7 +42,8 @@
     "ts-loader": "^9.3.0",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.8.1"
+    "webpack-dev-server": "^4.8.1",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "axios": "^0.27.2",
