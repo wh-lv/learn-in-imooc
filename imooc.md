@@ -24,7 +24,7 @@ function ajax1(url, method = "get", headers = [], body) {
         request.onreadychange = function() {
             if (request.readyState === 4) {
                 if (request.status === 200 || request.status === 304) {
-                    resolve(request.responseTest)
+                    resolve(request.responseText)
                 } else {
                     reject(request)
                 }
@@ -210,6 +210,14 @@ console.log(foo.getName()) // zhihui
 
 四次挥手：是为了断开链接，client向server发送请求断开连接的消息，server收到消息并回复消息，表示准备断开连接，之后server再次向client发送消息表述传输已完成，表示可以断开连接，client收到消息后向server回复断开链接的消息
 
+
+
+*首先，tcp是可靠传输协议，需要三次握手建立连接服务。*
+
+*三次握手的目的是“为了防止已经失效的连接请求报文段突然又传到服务端，因而产生错误”，这种情况是：client端发出了一个连接请求报文，而是因为某些未知的原因在某个网络节点上发生延迟、滞留，导致延迟到连接释放以后的某个时间才到达server端。本来这是一个早已失效的报文段，但是server收到此失效的报文之后，会误认为是client再次发出的一个新的连接请求，于是server端就向client又发出确认报文，表示同意建立连接。如果不采用“三次握手”，那么只要server端发出确认报文就会认为新的连接已经建立了，但是client端此时并没有发出建立连接的请求，因此不会去向server端发送数据，server端没有收到数据就会一直等待，产生死锁现象，这样server端就会白白浪费掉很多资源。如果采用“三次握手”的话就不会出现这种情况，client端首先发出连接请求并进入等待状态，server接收连接请求后同意建立连接，并向client返回报文段表示已经建立连接server进入SYN_RECV状态，client接收到server发出的确认信息后自己再发出确认信息，然后就可以建立直接通信。所以说只有三次握手在逻辑上才是最合适的，可以保障可靠性。*
+
+*三次握手的最主要目的是保证连接是双工的，可靠更多的是通过重传机制来保证的。*
+
 #### 六、JS中 for-in 和 for-of 有什么区别
 
 1、for-in 遍历拿到key，for-of 遍历拿到value；
@@ -267,6 +275,34 @@ function createPromise(val) {
     }  
 })()
 ```
+
+异步迭代器(for-await-of)：循环等待每个 Promise 对象变为 resolved 状态才进入下一步
+
+```js
+function Gen(time) {
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            resolve(time)
+        }, time)
+    })
+}
+async function test() {
+    let arr = [Gen(2000), Gen(100), Gen(3000)]
+    for (let item of arr) {
+        console.log(Date.now(), item.then(console.log))
+    }
+}
+
+// 输出
+1651760747409 Promise
+1651760747409 Promise
+1651760747409 Promise
+100
+2000
+3000
+```
+
+
 
 #### 八、offsetHeight、scrollHeight、clientHeight有什么区别
 
@@ -327,17 +363,108 @@ watch 是监听现有数据变化
 
 1、props和$emit；
 
-2、自定义事件
+```text
+父组件 A 通过 props 的方式向子组件 B 传递，B to A 通过在 B 组件中 $emit, A 组件中 v-on 的方式实现。
+```
 
-3、$attrs（$attributes）
+2、自定义事件（$emit/$on）
 
-4、$parent
+```text
+这种方法通过一个空的 Vue 实例作为中央事件总线（事件中心），用它来触发事件和监听事件，巧妙而轻量地实现了任何组件间的通信，包括父子、兄弟、跨级。
+
+var Event=new Vue();
+Event.$emit(事件名,数据);
+Event.$on(事件名,data => {});
+```
+
+3、$attrs（$attributes）/ $listeners
+
+```text
+$attrs：包含了父作用域中不被 prop 所识别 (且获取) 的特性绑定 (class 和 style 除外)。当一个组件没有声明任何 prop 时，这里会包含所有父作用域的绑定 (class 和 style 除外)，并且可以通过 v-bind="$attrs" 传入内部组件。通常配合 interitAttrs(可以关闭自动挂载到组件根元素上的没有在 props 声明的属性) 选项一起使用。
+$listeners：包含了父作用域中的 (不含 .native 修饰器的) v-on 事件监听器。它可以通过 v-on="$listeners" 传入内部组件。
+```
+
+4、$parent（$children）
 
 5、$refs
 
-6、provide/inject
+6、provide/inject（`provide` 和 `inject` 绑定并不是可响应的，可以把 this 传入 或者使用 Vue.observable()）
 
-7、Vuex
+7、Vuex（状态管理库）
+
+```text
+vuex的五个属性及使用
+1. state: 基本数据，存储变量  this.$store.state.a
+	const store = new Vuex.store({
+		state: {
+			a: 'true',
+			b: 2,
+			c: false,
+			d: null
+		}
+	})
+	
+	const app = createApp({ /* 根组件 */ })
+    // 将 store 实例作为插件安装
+    app.use(store)
+2. getters: 从基本数据派生的数据，相当于 state 的计算属性，具有返回值的方法  this.$store.getters.a
+	getter: {
+		a: state => state.a,
+		b: state => state.b * 2
+	}
+3. mutation: 提交更新数据的方法，必须是同步的。每个 mutation 都有一个字符串的事件类型和一个回调函数
+	mutations: {
+		a: (state, userId) => {
+			state.userId = userId
+		},
+		b: (state, token) => {
+			state.token = token
+		}
+	}
+4. action: 和 mutation 的功能大致相同；不同：1. Action 提交的是 mutation，而不是直接变更状态；2.Action可以包含异步操作。dispatch：异步操作，写法：this.$store.dispatch('action方法名', 值)
+	actions: {
+		a({ commit }, value) {
+			commit('SET_USER', value)
+		}
+	}
+5. modules：模块化 vuex，可以让每一个模块拥有自己的 state、getters、mutation、action
+```
+
+**扩展：**vuex页面刷新数据丢失问题的四种解决方式
+
+1.  sessionStorage（sessionStorage不是响应式的，需同步更新）
+
+2.  vuex-along 、vuex-presistedstate、vuex-persist（使用方法大同小异）
+
+   ```
+   import Vue from 'vue'
+   import Vuex from 'vuex'
+   import indexOne from "./modules/indexOne"
+   import VueXAlong from 'vuex-along'
+    
+   Vue.use(Vuex)
+   const store=new Vuex.Store({
+       strict: false,
+       modules:{
+           indexOne
+       },
+        
+       plugins: [
+           VueXAlong({
+               // 存放在localStroage或者sessionStroage 中的名字
+               name: 'along',   
+               //是否存放在local中  false 不存放 如果存放按照下面session的配置配
+               local: false,      
+               // 如果值不为false 那么可以传递对象 其中 当isFilter设置为true时， 
+               //list 数组中的值就会被过滤调,这些值不会存放在seesion或者local中
+               session: { list: [], isFilter: true }   
+           })
+       ]
+    
+   })
+    
+   export default store;3.
+   ```
 
 #### 十二、Vuex中 action 和 mutation 有什么区别
 
