@@ -627,7 +627,7 @@ fn() // WeakMap不会影响 obj 的回收
 
 1、JS是单线程的（无论在浏览器还是nodejs）
 
-2、浏览器中JS执行和DOM渲染公共一个线程
+2、浏览器中JS执行和DOM渲染公用一个线程
 
 3、异步
 
@@ -902,6 +902,28 @@ export default {
 }
 ```
 
+**扩展：Vue父子组建生命周期执行顺序**
+
+加载渲染过程：
+
+```text
+父beforeCreate -> 父created -> 父beforeMount -> 子beforeCreate -> 子created -> 子beforeMount -> 子mounted -> 父mounted
+```
+
+更新过程：
+
+```text
+父beforeUpdate -> 子beforeUpdate -> 子updated -> 父updated
+```
+
+销毁过程：
+
+```text
+父beforeDestroy -> 子beforeDestroy -> 子destroyed -> 父destroyed
+```
+
+
+
 #### 二十五、Vue2、Vue3和React三者的diff算法有什么区别
 
 tree diff算法的优化：
@@ -1074,6 +1096,10 @@ HTTP1.1：
 
 增加了缓存策略 cache-control E-tag等
 
+```text
+cache-control: no-cache | no-store | max-age | must-revalidate
+```
+
 支持长连接Connection：keep-alive，一次TCP连接多次请求
 
 支持断点续传，中间状态码206
@@ -1095,6 +1121,22 @@ HTTP是明文传输
 HTTPS是加密传输
 
 ![](E:\Installed\Tencent\Pictures\QQplayerPic\6-11 什么是HTTPS中间人攻击，如[00_13_18][20220404-144803].png)
+
+```text
+1. 服务器向客户端发送公钥；
+2. 攻击者截获公钥，保留在自己手上；
+3. 然后攻击者自己生成一个【伪造的】公钥，发给客户端
+4. 客户端收到伪造的公钥后，生成加密hash值发给服务器；
+5. 攻击者获得加密的hash值，用自己的私钥解密获得真密钥；
+6. 同时生成假的加密hash值，发给服务器；
+7. 服务器用私钥解密获得假密钥；
+8. 服务器用假密钥加密传输信息。
+
+防范方法：
+1. 服务端在发送浏览器的公钥中加入CA证书，浏览器可以验证CA证书的有效性
+```
+
+
 
 #### 三十二、script标签的defer和async有什么区别
 
