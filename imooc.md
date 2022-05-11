@@ -1889,7 +1889,7 @@ console.info(f2)
 
 Object.create 创建空对象，原型指向传入的参数。
 
-#### 五十四、深度/广度 优先遍历一个DOM树
+#### 五十六、深度/广度 优先遍历一个DOM树
 
 ```js
 /**
@@ -1927,6 +1927,23 @@ export function depthFirstTraverse(root: Node) {
         childNodes.forEach(child => {
             depthFirstTraverse(child)
         })
+    }
+}
+// 深度优先遍历（栈实现）
+export function depthFirstTraverse2(root: Node) {
+    const stack: Node[] = []
+    stack.push(root)
+    
+    while(stack.length > 0) {
+        const curNode = stack.pop()
+        if (curNode == null) break
+        
+        visitNode(curNode)
+        
+        const childNodes = curNode.childNodes
+        if (childNodes.length) {
+            Array.from(childNodes).reverse().forEach(child => stack.push(child))
+        }
     }
 }
 
@@ -1999,7 +2016,7 @@ class MyQueue {
 
 ```
 
-#### 五十五、手写一个LazyMan，实现sleep机制
+#### 五十七、手写一个LazyMan，实现sleep机制
 
 ```js
 class LazyMan {
@@ -2059,7 +2076,7 @@ zhihui 睡了 2s，开始执行下一个任务
 zhihui eat 芒果
 ```
 
-#### 五十六、手写curry函数，实现函数柯里化
+#### 五十八、手写curry函数，实现函数柯里化
 
 ```ts
 export function curry(fn: Function) {
@@ -2097,7 +2114,7 @@ const res = curryAdd(10)(20)(30)
 console.info(res)
 ```
 
-#### 五十七、instanceof原理，用代码实现
+#### 五十九、instanceof原理，用代码实现
 
 **instanceof原理：**
 
@@ -2132,7 +2149,7 @@ export function myInstanceof(instance: any, origin: any): boolean {
 }
 ```
 
-#### 五十八、手写bind功能
+#### 六十、手写bind功能
 
 ```ts
 // @ts-ignore
@@ -2157,7 +2174,7 @@ const f = fn.customBind({ x: 100 }, 10)
 f(20, 30)
 ```
 
-#### 五十九、手写函数call和apply功能
+#### 六十一、手写函数call和apply功能
 
 ```ts
 /**
@@ -2202,7 +2219,7 @@ Function.prototype.customApply = function(context: any, applyArgs: any[]) {
 }
 ```
 
-#### 六十、手写 EventBus 自定义事件
+#### 六十二、手写 EventBus 自定义事件
 
 ```ts
 class EventBus {
@@ -2260,7 +2277,7 @@ class EventBus {
 }
 ```
 
-#### 六十一、用JS实现一个LRU缓存-分析数据结构特点（使用Map）
+#### 六十三、用JS实现一个LRU缓存-分析数据结构特点（使用Map）
 
 **什么是LRU缓存？**
 
@@ -2309,7 +2326,7 @@ export class LRUCache {
 }
 ```
 
-#### 六十二、不用Map实现LRU（双向链表）
+#### 六十四、不用Map实现LRU（双向链表）
 
 ```ts
 /**
@@ -2446,7 +2463,7 @@ export default class LRUCache {
 }
 ```
 
-#### 六十三、手写JS深拷贝-考虑各种数据类型（Map、Set等）和循环引用
+#### 六十五、手写JS深拷贝-考虑各种数据类型（Map、Set等）和循环引用
 
 1、使用JSON.stringify和JSON.parse（无法转换函数、无法转换Map和Set、无法转换循环引用）
 
