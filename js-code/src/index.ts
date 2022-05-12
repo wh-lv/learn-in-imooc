@@ -50,7 +50,10 @@
 // practice 0421
 // import "./practice-0421/array-to-tree"
 // import "./practice-0421/tree-to-array"
-import "./practice-0421/dom-traverse"
+// import "./practice-0421/dom-traverse"
+
+// practice 0512
+import "./practice0512/tree-to-arr"
 
 // practice
 // import {

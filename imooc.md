@@ -2573,19 +2573,19 @@ export function cloneDeep(obj: any, map = new WeakMap()): any {
 
 ### `分析和解决问题的思路 - 可以独立解决问题`
 
-#### 六十四、[1, 2, 3].map(parseInt)
+#### 六十六、[1, 2, 3].map(parseInt)
 
 ```js
 // [1, 2, 3].map(parseInt) // 1 NaN NaN
-const arr = [1, 2, 3]
+const arr = [1, 2, 3] // (1, 0) (2, 1) (3, 2)
 arr.map((item, index) => {
     return parseInt(item, index)
 })
 ```
 
-parseInt(string, radix)  radix为可选参，表示要解析的数字的基数，介于 2-36 之间
+parseInt(string, radix)  radix为可选参，表示要解析的数字的基数，介于 2-36 之间；当参数 radix 的值为 0，或没有设置该参数时，parseInt() 会根据 string 来判断数字的基数
 
-#### 六十五、函数形参修改，能否影响实参
+#### 六十七、函数形参修改，能否影响实参
 
 ```js
 function fn(x) {
@@ -2612,7 +2612,7 @@ let x = num
 let y = obj
 ```
 
-#### 六十六、手写convert函数，将数组转为树
+#### 六十八、手写convert函数，将数组转为树
 
 ```ts
 const arr = [
@@ -2661,7 +2661,7 @@ export function convert(arr: ITreeItem[]): ITreeNode | null {
 }
 ```
 
-#### 六十七、把一个树转为数组
+#### 六十九、把一个树转为数组
 
 广度优先遍历
 
@@ -2708,7 +2708,7 @@ export function convert(root: ITreeNode): ITreeItem[] {
 }
 ```
 
-#### 六十八、构造函数和原型的重名属性
+#### 七十、构造函数和原型的重名属性
 
 ```js
 function Foo() {
@@ -2729,7 +2729,7 @@ Foo.a()
 // 4 2 1
 ```
 
-#### 六十九、promise-then执行顺序问题
+#### 七十一、promise-then执行顺序问题
 
 ```js
 Promise.resolve().then(() => {
@@ -2763,7 +2763,7 @@ then中返回promise实例，会出现“慢两拍”的效果
 
 第二拍，then函数挂载到MicroTaskQueue（参考Event Loop）
 
-#### 七十、React-setState经典面试题
+#### 七十二、React-setState经典面试题
 
 ```react
 
@@ -2811,14 +2811,14 @@ Ajax回调
 上述场景，在React 18中可以异步更新（Auto Batch）
 
 需将 ReactDOM.render 替换为 ReactDOM.createRoot
-### 七十一、React-setState是微任务还是宏任务
+#### 七十三、React-setState是微任务还是宏任务
 
 **setState本质是同步（不是宏任务或微任务，宏任务或微任务是对于异步来说的）**
 setState是同步，只不过让React做成了异步的样子
 因为要考虑性能，多次state修改，只进行一次DOM渲染
 日常所说的“异步”不严谨
 
-### 七十二、对象和属性的连续赋值
+#### 七十四、对象和属性的连续赋值
 
 ```js
 
@@ -2836,7 +2836,7 @@ a.x = undefined
 let x = a.x // x 变量是假想的，实际执行时不会有
 x = a = { n: 2 }
 
-### 七十三、对象属性类型的问题
+#### 七十五、对象属性类型的问题
 ```js
 
 let a = {}, b = '123', c = 123
