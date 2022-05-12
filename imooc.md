@@ -2084,7 +2084,7 @@ export function curry(fn: Function) {
     const fnArgaLength = fn.length
     let args: any[] = []
 
-    // ts 中，独立的幻术，this 需要声明类型
+    // ts 中，独立的函数，this 需要声明类型
     function calc(this: any, ...newArgs: any[]) {
         // 积累参数
         args = [
@@ -2553,6 +2553,11 @@ export function cloneDeep(obj: any, map = new WeakMap()): any {
     // Array
     if (obj instanceof Array) {
         target = obj.map(item => cloneDeep(item, map))
+    }
+    
+    // RegExp
+    if (obj instanceof RegExp) {
+        target = obj
     }
 
     // Object
