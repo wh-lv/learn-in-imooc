@@ -63,8 +63,20 @@ class Compile {
                 const dir = attrName.substring(2); // xxx
                 
                 this[dir] && this[dir](node, exp)
+            } else if (attrName.indexOf("@") === 0) {
+                // @click="handleClick" exp: handleClick
+                const dir = attrName.substring(1); // click
+                // 事件监听处理
+                this.eventHandler(node, this.$vm, exp, dir);
             }
         })
+    }
+
+    eventHandler(node, vm, exp, dir) {
+        const fn = vm.$options.methods && vm.$options.methods[exp];
+        if (dir && fn) {
+            node.addEventListener(dir, fn.bind(vm));
+        }
     }
 
     update(node, exp, dir) {
@@ -80,6 +92,22 @@ class Compile {
     }
 
     text(node, exp) {
-        this.update(node, exp, "text")
+        this.update(node, exp, "text");
+    }
+    html(node, exp) {
+        this.update(node, exp, "html");
+    }
+    model(node, exp) {
+        this.update(node, exp, "model");
+
+        node.addEventListener("input", (event) => {
+            this.$vm[exp] = event.target.value;
+        })
+    }
+    htmlUpdator(node, value) {
+        node.innerHTML = value;
+    }
+    modelUpdator(node, value) {
+        node.value = value;
     }
 }
